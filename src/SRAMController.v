@@ -16,7 +16,7 @@ module SRAMController (
 	output reg we_n,
 	output reg [4:0] addr,
 	input wire [31:0] sram_data_out,
-	output reg [31:0] sram_data_in
+	output reg [31:0] sram_data_in,
 	// soc_serv
 	output  reg       i_rst, 
 	input   wire [31:0] sram_addr_serv,
