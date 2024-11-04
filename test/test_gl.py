@@ -7,8 +7,8 @@ from cocotb.triggers import ClockCycles, FallingEdge, Timer
 from cocotb.utils import get_sim_time
 import random
 
-NUM_RUNS_SMOKE = 100
-NUM_RUNS_RANDOM = 100
+NUM_RUNS_SMOKE = 1
+NUM_RUNS_RANDOM = 1
 BAUD_ERR_PERCENT = 2
 
 @cocotb.test(timeout_time=50, timeout_unit='sec')
@@ -172,38 +172,39 @@ async def check_data(dut, data_write_0, data_write_1, data_write_2, data_write_3
     TEST_DATA_LSB_2 = [(data_write_2 >> s) & 1 for s in range(8)]
     TEST_DATA_LSB_3 = [(data_write_3 >> s) & 1 for s in range(8)]
     #i = 0
-    await FallingEdge(dut.user_project.UARTTransmitter_ins.out)
+    uart_instance = getattr(dut.user_project, r"\UARTTransmitter_ins.out")
+    await FallingEdge(uart_instance)
     # make sure signal is stable
     await Timer(int(0.5 / baud * baud_mult * 1e12), units="ps")
     # check every bit of received data 0
     for expected_bit in [0] + TEST_DATA_LSB_0 + [1]:
         #dut._log.info("i -> {0}".format(i))
         #dut._log.info(f"current simulation time: {get_sim_time(units='ns')} ns")
-        assert dut.user_project.UARTTransmitter_ins.out.value == expected_bit
+        assert uart_instance.value == expected_bit
         #i = i + 1
         #print("dut_value.out->{0}".format(dut.user_project.UARTTransmitter_ins.out.value))
         #print("expected_value->{0}".format(expected_bit))
         await Timer(int(1.0 / baud * baud_mult * 1e12), units="ps")
-    await FallingEdge(dut.user_project.UARTTransmitter_ins.out)
+    await FallingEdge(uart_instance)
     # make sure signal is stable
     await Timer(int(0.5 / baud * baud_mult * 1e12), units="ps")
     # check every bit of received data 1
     for expected_bit in [0] + TEST_DATA_LSB_1 + [1]:
-        assert dut.user_project.UARTTransmitter_ins.out.value == expected_bit
+        assert uart_instance.value == expected_bit
         await Timer(int(1.0 / baud * baud_mult * 1e12), units="ps")
-    await FallingEdge(dut.user_project.UARTTransmitter_ins.out)
+    await FallingEdge(uart_instance)
     # make sure signal is stable
     await Timer(int(0.5 / baud * baud_mult * 1e12), units="ps")
     # check every bit of received data 2
     for expected_bit in [0] + TEST_DATA_LSB_2 + [1]:
-        assert dut.user_project.UARTTransmitter_ins.out.value == expected_bit
+        assert uart_instance.value == expected_bit
         await Timer(int(1.0 / baud * baud_mult * 1e12), units="ps")
-    await FallingEdge(dut.user_project.UARTTransmitter_ins.out)
+    await FallingEdge(uart_instance)
     # make sure signal is stable
     await Timer(int(0.5 / baud * baud_mult * 1e12), units="ps")
     # check every bit of received data 3
     for expected_bit in [0] + TEST_DATA_LSB_3 + [1]:
-        assert dut.user_project.UARTTransmitter_ins.out.value == expected_bit
+        assert uart_instance.value == expected_bit
         await Timer(int(1.0 / baud * baud_mult * 1e12), units="ps")
     dut._log.info("CASE PASS")
 

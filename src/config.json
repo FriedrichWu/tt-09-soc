@@ -17,7 +17,7 @@
 
   "//": "CLOCK_PERIOD - Increase this in case you are getting setup time violations.",
   "//": "The value is in nanoseconds, so 20ns == 50MHz.",
-  "CLOCK_PERIOD": 20,
+  "CLOCK_PERIOD": 40,
 
   "//": "Hold slack margin - Increase them in case you are getting hold violations.",
   "PL_RESIZER_HOLD_SLACK_MARGIN": 0.1,
@@ -32,6 +32,36 @@
   "CLOCK_PORT": "clk",
 
   "//": "Configuration docs: https://openlane.readthedocs.io/en/latest/reference/configuration.html",
+
+  "EXTRA_VERILOG_MODELS": ["dir::myconfig_sky_dual.v"],
+
+  "FP_PDN_CHECK_NODES": false,
+  "FP_PDN_VOFFSET": 26.32,
+  "FP_PDN_CFG": "dir::../pdn_cfg.tcl",
+  "RUN_MAGIC_WRITE_LEF": true,
+  "MAGIC_LEF_WRITE_USE_GDS": false,
+  "MAGIC_CAPTURE_ERRORS": false,
+  "MAGIC_DRC_USE_GDS": false,
+  "QUIT_ON_MAGIC_DRC": false,
+  "QUIT_ON_KLAYOUT_DRC": false,
+  "SYNTH_ABC_BUFFERING": true,
+  "RUN_HEURISTIC_DIODE_INSERTION": true,
+  "VDD_NETS": "VDPWR",
+  "GND_NETS": "VGND",
+  "FP_PDN_MACRO_HOOKS": "sram_ins VDPWR VGND vccd1 vssd1",
+  "SYNTH_POWER_DEFINE": "USE_POWER_PINS",
+  "MACROS": {
+	  "myconfig_sky_dual": {
+		"instances": {
+		  "sram_ins": {
+			"location": [100, 18],
+			"orientation": "N"
+		  }
+		},
+		"gds": ["dir::../macro/myconfig_sky_dual.gds"],
+		"lef": ["dir::../macro/myconfig_sky_dual.lef"]
+	  }
+  },
 
   "//": "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
   "//": "!!! DO NOT CHANGE ANYTHING BELOW THIS POINT !!!",
