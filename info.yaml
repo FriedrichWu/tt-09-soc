@@ -22,7 +22,7 @@ project:
     - "SRAMController.v"
     - "UARTReceiver.v"
     - "UARTTransmitter.v"
-    - "/CPU/serv_aligner.v"
+    - "./CPU/serv_aligner.v"
     - "/CPU/serv_alu.v" 
     - "/CPU/serv_bufreg.v"
     - "/CPU/serv_bufreg2.v"
