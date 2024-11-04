@@ -17,6 +17,7 @@ module SRAMController (
 	output reg [4:0] addr,
 	input wire [31:0] sram_data_out,
 	output reg [31:0] sram_data_in,
+	output reg [3:0] wmask,
 	// soc_serv
 	output  reg       i_rst, 
 	input   wire [31:0] sram_addr_serv,
@@ -24,7 +25,8 @@ module SRAMController (
 	input wire [31:0] sram_data_write_serv,
 	input wire       sram_cs,
 	input wire       sram_we,
-	output  reg        sram_ack
+	output  reg        sram_ack,
+	input wire [3:0] sram_wmask 
 );
 //=====================================//
 //==========INTERNAL_SIGNAL============//
@@ -113,6 +115,7 @@ always @(*) begin
 	i_rst = 'b1;//keep serv in reset
 	sram_ack = 'b0;
 	sram_data_read_serv = 'b0;
+	wmask = 4'b1;//defaut all active, word write
 	case (cur_state)
 		IDLE: begin
 			if (rx_valid) begin
@@ -278,6 +281,7 @@ always @(*) begin
 					    csb_n = 'b0;
 					    we_n = 'b0;
 						//add wmask here if we need half word/byte op
+						wmask = sram_wmask;
 						addr = sram_addr_serv[4:0];
 						sram_data_in = sram_data_write_serv;
 						sram_ack = 'b1;

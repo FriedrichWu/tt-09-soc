@@ -69,7 +69,6 @@ assign reset = ~rst_n;
 assign rx_in = ui_in[3];
 assign uio_out[4] = tx_out;
 assign cs = ~csb_n;
-assign wmask = we_n ? 4'b0 : sram_wmask;
 //============================================//
 //=================INSTANCES==================//
 //============================================//
@@ -115,6 +114,7 @@ SRAMController SRAMController_ins (
 	//.sram_data_out (sram_data_out_full[31:0]),
 	.sram_data_out (sram_data_out),
 	.sram_data_in (sram_data_in),
+	.wmask (wmask),
 	// soc_serv
 	.i_rst (i_rst), 
 	.sram_addr_serv (sram_addr_serv),
@@ -122,7 +122,8 @@ SRAMController SRAMController_ins (
 	.sram_data_write_serv (sram_data_write_serv),
 	.sram_cs (sram_cs),
 	.sram_we (sram_we),
-	.sram_ack (sram_ack)
+	.sram_ack (sram_ack),
+	.sram_wmask (sram_wmask)
 );
 /*
 myconfig_sky sram_ins (
