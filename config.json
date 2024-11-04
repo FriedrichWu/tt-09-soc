@@ -18,10 +18,6 @@
 	"QUIT_ON_KLAYOUT_DRC": false,
 	"SYNTH_ABC_BUFFERING": true,
 	"RUN_HEURISTIC_DIODE_INSERTION": true,
-	"VDD_NETS": "VDPWR",
-	"GND_NETS": "VGND",
-    "FP_PDN_MACRO_HOOKS": "sram_ins VDPWR VGND VPWR VGND",
-	"SYNTH_POWER_DEFINE": "USE_POWER_PINS",
 	"MACROS": {
 		"RAM32": {
 		  "instances": {
@@ -30,24 +26,24 @@
 			  "orientation": "N"
 			}
 		  },
-		  "gds": ["dir::macros/RAM32.gds"],
-		  "lef": ["dir::macros/RAM32.lef"],
-		  "nl": ["dir::macros/RAM32.nl.v"],
+		  "gds": ["dir::macro/RAM32.gds"],
+		  "lef": ["dir::macro/RAM32.lef"],
+		  "nl": ["dir::macro/RAM32.nl.v"],
 		  "spef": {
-			"min_*": ["dir::macros/RAM32.min_.spef"],
-			"nom_*": ["dir::macros/RAM32.nom_.spef"],
-			"max_*": ["dir::macros/RAM32.max_.spef"]
+			"min_*": ["dir::macro/RAM32.min_.spef"],
+			"nom_*": ["dir::macro/RAM32.nom_.spef"],
+			"max_*": ["dir::macro/RAM32.max_.spef"]
 		  },
 		  "lib": {
-			"min_tt_025C_1v80": "dir::macros/RAM32.lib/min_tt_025C_1v80/RAM32__min_tt_025C_1v80.lib",
-			"min_ff_n40C_1v95": "dir::macros/RAM32.lib/min_ff_n40C_1v95/RAM32__min_ff_n40C_1v95.lib",
-			"max_ff_n40C_1v95": "dir::macros/RAM32.lib/max_ff_n40C_1v95/RAM32__max_ff_n40C_1v95.lib",
-			"nom_tt_025C_1v80": "dir::macros/RAM32.lib/nom_tt_025C_1v80/RAM32__nom_tt_025C_1v80.lib",
-			"min_ss_100C_1v60": "dir::macros/RAM32.lib/min_ss_100C_1v60/RAM32__min_ss_100C_1v60.lib",
-			"max_ss_100C_1v60": "dir::macros/RAM32.lib/max_ss_100C_1v60/RAM32__max_ss_100C_1v60.lib",
-			"max_tt_025C_1v80": "dir::macros/RAM32.lib/max_tt_025C_1v80/RAM32__max_tt_025C_1v80.lib",
-			"nom_ss_100C_1v60": "dir::macros/RAM32.lib/nom_ss_100C_1v60/RAM32__nom_ss_100C_1v60.lib",
-			"nom_ff_n40C_1v95": "dir::macros/RAM32.lib/nom_ff_n40C_1v95/RAM32__nom_ff_n40C_1v95.lib"
+			"min_tt_025C_1v80": "dir::macro/RAM32.lib/min_tt_025C_1v80/RAM32__min_tt_025C_1v80.lib",
+			"min_ff_n40C_1v95": "dir::macro/RAM32.lib/min_ff_n40C_1v95/RAM32__min_ff_n40C_1v95.lib",
+			"max_ff_n40C_1v95": "dir::macro/RAM32.lib/max_ff_n40C_1v95/RAM32__max_ff_n40C_1v95.lib",
+			"nom_tt_025C_1v80": "dir::macro/RAM32.lib/nom_tt_025C_1v80/RAM32__nom_tt_025C_1v80.lib",
+			"min_ss_100C_1v60": "dir::macro/RAM32.lib/min_ss_100C_1v60/RAM32__min_ss_100C_1v60.lib",
+			"max_ss_100C_1v60": "dir::macro/RAM32.lib/max_ss_100C_1v60/RAM32__max_ss_100C_1v60.lib",
+			"max_tt_025C_1v80": "dir::macro/RAM32.lib/max_tt_025C_1v80/RAM32__max_tt_025C_1v80.lib",
+			"nom_ss_100C_1v60": "dir::macro/RAM32.lib/nom_ss_100C_1v60/RAM32__nom_ss_100C_1v60.lib",
+			"nom_ff_n40C_1v95": "dir::macro/RAM32.lib/nom_ff_n40C_1v95/RAM32__nom_ff_n40C_1v95.lib"
 		  }
 		}
 	},
