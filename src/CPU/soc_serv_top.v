@@ -8,7 +8,8 @@ module soc_serv_top (
 	output wire [31:0] sram_data_write,
 	output wire        sram_we,//only dbus could write
 	output wire        sram_cs,//select mem
-	input  wire        sram_ack
+	input  wire        sram_ack,
+	output wire [3:0]  sram_wmask,
 );
 //============INTERNAL_SIGNAL===========//
 wire [31:0] o_ibus_adr;
@@ -40,7 +41,7 @@ serv_rf_top serv_rf_top_ins(
    .i_ibus_ack(i_ibus_ack),
    .o_dbus_adr(o_dbus_adr),
    .o_dbus_dat(o_dbus_dat),
-   .o_dbus_sel(), //not used jet, only SW
+   .o_dbus_sel(sram_wmask), 
    .o_dbus_we(o_dbus_we) ,
    .o_dbus_cyc(o_dbus_cyc),
    .i_dbus_rdt(sram_data_read),

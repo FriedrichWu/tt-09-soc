@@ -61,10 +61,14 @@ wire [31:0] sram_data_write_serv;
 wire sram_cs;
 wire sram_we;
 wire sram_ack;
+wire [3:0] sram_wmask;
+wire [3:0] w_mask;
 //assign sram_data_in_full = {1'b0, sram_data_in};
 assign reset = ~rst_n;
 assign rx_in = ui_in[3];
 assign uio_out[4] = tx_out;
+assign cs = ~csb_n;
+assign wmask = we_n ? 4'b0 : sram_wmask;
 //============================================//
 //=================INSTANCES==================//
 //============================================//
@@ -134,22 +138,19 @@ myconfig_sky sram_ins (
   .dout0(sram_data_out_full)
 );
 */
-myconfig_sky_dual sram_ins (
+
+RAM32 ram1 (
 `ifdef USE_POWER_PINS
-    .vccd1  (VDPWR          ),
-    .vssd1  (VGND          ),
-`endif		
-	.clk0 (clk),
-	.csb0 (csb_n),
-	.web0 (we_n),
-	.addr0 (addr[3:0]),
-	.din0 (sram_data_in),
-	.dout0 (sram_data_out),
-	.clk1 (1'b0),
-	.addr1 (4'b0),
-	.csb1  (1'b1),
-	.dout1 ()
-);
+      .VPWR(VDPWR),
+      .VGND(VGND),
+`endif
+      .CLK (clk),
+      .EN0 (cs),
+      .A0  (addr),
+      .WE0 (wmask),
+      .Di0 (sram_data_in),
+      .Do0 (sram_data_out)
+  );
 soc_serv_top soc_serv_top_ins(
 	.clk (clk),
 	.i_rst (i_rst),
@@ -159,6 +160,7 @@ soc_serv_top soc_serv_top_ins(
 	.sram_data_write(sram_data_write_serv),
 	.sram_we(sram_we),//only dbus could write
 	.sram_cs(sram_cs),//select mem
-	.sram_ack(sram_ack)
+	.sram_ack(sram_ack),
+	.sram_wmask(sram_wmask)
 );
 endmodule

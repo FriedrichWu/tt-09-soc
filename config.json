@@ -5,15 +5,13 @@
 					"dir::src/CPU/serv_csr.v","dir::src/CPU/serv_ctrl.v","dir::src/CPU/serv_debug.v","dir::src/CPU/serv_decode.v",
 				"dir::src/CPU/serv_immdec.v","dir::src/CPU/serv_mem_if.v","dir::src/CPU/serv_rf_if.v","dir::src/CPU/serv_rf_ram_if.v","dir::src/CPU/serv_rf_ram.v","dir::src/CPU/serv_rf_top.v",
 			"dir::src/CPU/serv_state.v","dir::src/CPU/serv_top.v", "dir::src/CPU/soc_serv_top.v"],
-	"EXTRA_VERILOG_MODELS": ["dir::src/myconfig_sky_dual.v"],
+	"EXTRA_VERILOG_MODELS": ["dir::src/RAM32.v"],
   
 	"FP_PDN_CHECK_NODES": false,
 	"FP_PDN_VOFFSET": 26.32,
-	"FP_PDN_VPITCH": 138.87,
 	"FP_PDN_CFG": "pdn_cfg.tcl",
 	"RUN_MAGIC_WRITE_LEF": true,
-	"MAGIC_LEF_WRITE_USE_GDS": false,
-	"MAGIC_CAPTURE_ERRORS": false,
+	"MAGIC_LEF_WRITE_USE_GDS": true,
 	"MAGIC_WRITE_LEF_PINONLY": true,
 	"MAGIC_DRC_USE_GDS": false,
 	"QUIT_ON_MAGIC_DRC": false,
@@ -22,23 +20,40 @@
 	"RUN_HEURISTIC_DIODE_INSERTION": true,
 	"VDD_NETS": "VDPWR",
 	"GND_NETS": "VGND",
-    "FP_PDN_MACRO_HOOKS": "sram_ins VDPWR VGND vccd1 vssd1",
+    "FP_PDN_MACRO_HOOKS": "sram_ins VDPWR VGND VPWR VGND",
 	"SYNTH_POWER_DEFINE": "USE_POWER_PINS",
 	"MACROS": {
-		"myconfig_sky_dual": {
+		"RAM32": {
 		  "instances": {
-			"sram_ins": {
-			  "location": [100, 16],
+			"ram1": {
+			  "location": [10, 10],
 			  "orientation": "N"
 			}
 		  },
-		  "gds": ["dir::macro/myconfig_sky_dual.gds"],
-		  "lef": ["dir::macro/myconfig_sky_dual.lef"]
+		  "gds": ["dir::macros/RAM32.gds"],
+		  "lef": ["dir::macros/RAM32.lef"],
+		  "nl": ["dir::macros/RAM32.nl.v"],
+		  "spef": {
+			"min_*": ["dir::macros/RAM32.min_.spef"],
+			"nom_*": ["dir::macros/RAM32.nom_.spef"],
+			"max_*": ["dir::macros/RAM32.max_.spef"]
+		  },
+		  "lib": {
+			"min_tt_025C_1v80": "dir::macros/RAM32.lib/min_tt_025C_1v80/RAM32__min_tt_025C_1v80.lib",
+			"min_ff_n40C_1v95": "dir::macros/RAM32.lib/min_ff_n40C_1v95/RAM32__min_ff_n40C_1v95.lib",
+			"max_ff_n40C_1v95": "dir::macros/RAM32.lib/max_ff_n40C_1v95/RAM32__max_ff_n40C_1v95.lib",
+			"nom_tt_025C_1v80": "dir::macros/RAM32.lib/nom_tt_025C_1v80/RAM32__nom_tt_025C_1v80.lib",
+			"min_ss_100C_1v60": "dir::macros/RAM32.lib/min_ss_100C_1v60/RAM32__min_ss_100C_1v60.lib",
+			"max_ss_100C_1v60": "dir::macros/RAM32.lib/max_ss_100C_1v60/RAM32__max_ss_100C_1v60.lib",
+			"max_tt_025C_1v80": "dir::macros/RAM32.lib/max_tt_025C_1v80/RAM32__max_tt_025C_1v80.lib",
+			"nom_ss_100C_1v60": "dir::macros/RAM32.lib/nom_ss_100C_1v60/RAM32__nom_ss_100C_1v60.lib",
+			"nom_ff_n40C_1v95": "dir::macros/RAM32.lib/nom_ff_n40C_1v95/RAM32__nom_ff_n40C_1v95.lib"
+		  }
 		}
 	},
     "GRT_ALLOW_CONGESTION": true,
-	"FP_SIZING": "absolute",
-	"DIE_AREA": [0, 0, 490, 200],
+	"DIE_AREA": [0, 0, 508.76, 225.76],
+	"FP_DEF_TEMPLATE": "dir::tt/def/tt_block_3x2_pg.def",
   
 	"//": "MAGIC_DEF_LABELS may cause issues with LVS",
 	"MAGIC_DEF_LABELS": false,
@@ -61,9 +76,6 @@
     "BOTTOM_MARGIN_MULT": 1,
     "LEFT_MARGIN_MULT": 6,
     "RIGHT_MARGIN_MULT": 6,
-
-	"FP_IO_HLENGTH": 2,
-	"FP_IO_VLENGTH": 2,
   
 	"//": "don't use power rings or met5",
 	"DESIGN_IS_CORE": false,

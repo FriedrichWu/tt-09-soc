@@ -5,7 +5,7 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = tt_um_kmakise_soc.v SRAMController.v UARTReceiver.v UARTTransmitter.v ../macro/myconfig_sky_dual.v /CPU/serv_aligner.v /CPU/serv_alu.v /CPU/serv_bufreg.v /CPU/serv_bufreg2.v /CPU/serv_compdec.v /CPU/serv_csr.v /CPU/serv_ctrl.v /CPU/serv_debug.v /CPU/serv_decode.v /CPU/serv_immdec.v /CPU/serv_mem_if.v /CPU/serv_rf_if.v /CPU/serv_rf_ram_if.v /CPU/serv_rf_ram.v /CPU/serv_rf_top.v /CPU/serv_state.v /CPU/serv_top.v /CPU/soc_serv_top.v 
+PROJECT_SOURCES = tt_um_kmakise_soc.v SRAMController.v UARTReceiver.v UARTTransmitter.v ../macro/RAM32.v /CPU/serv_aligner.v /CPU/serv_alu.v /CPU/serv_bufreg.v /CPU/serv_bufreg2.v /CPU/serv_compdec.v /CPU/serv_csr.v /CPU/serv_ctrl.v /CPU/serv_debug.v /CPU/serv_decode.v /CPU/serv_immdec.v /CPU/serv_mem_if.v /CPU/serv_rf_if.v /CPU/serv_rf_ram_if.v /CPU/serv_rf_ram.v /CPU/serv_rf_top.v /CPU/serv_state.v /CPU/serv_top.v /CPU/soc_serv_top.v 
 
 ifneq ($(GATES),yes)
 
@@ -30,7 +30,7 @@ VERILOG_SOURCES += $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_f
 VERILOG_SOURCES += $(PWD)/gate_level_netlist.v
 
 # sram behavioral module
-VERILOG_SOURCES += ../macro/myconfig_sky_dual.v 
+VERILOG_SOURCES += ../macro/RAM32.v 
 endif
 
 # Include the testbench sources:
