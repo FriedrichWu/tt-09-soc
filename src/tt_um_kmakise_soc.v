@@ -62,7 +62,7 @@ wire sram_cs;
 wire sram_we;
 wire sram_ack;
 wire [3:0] sram_wmask;
-wire [3:0] w_mask;
+wire [3:0] wmask;
 wire cs;
 //assign sram_data_in_full = {1'b0, sram_data_in};
 assign reset = ~rst_n;
