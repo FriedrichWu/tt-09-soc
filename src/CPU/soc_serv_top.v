@@ -23,7 +23,7 @@ wire        o_dbus_we;
 // simple implementation, since in fact ibus & dbus will not be active at the same time
 assign i_ibus_ack      = sram_ack & !o_dbus_cyc;
 assign i_dbus_ack      = sram_ack & !o_ibus_cyc;
-assign sram_addr       = o_ibus_ack ? (o_ibus_adr >> 2) : (o_dbus_adr >> 2); //translate to the exact SRAM address 
+assign sram_addr       = o_ibus_cyc ? (o_ibus_adr >> 2) : (o_dbus_adr >> 2); //translate to the exact SRAM address 
 assign sram_data_write = o_dbus_dat;
 assign sram_we = o_dbus_we & !o_ibus_cyc;
 assign sram_cs = o_ibus_cyc | o_dbus_cyc;
