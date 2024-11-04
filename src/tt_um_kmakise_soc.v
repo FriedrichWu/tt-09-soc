@@ -7,7 +7,7 @@
 
 module tt_um_kmakise_soc (
 `ifdef USE_POWER_PINS
-    inout             VDPWR,
+    inout             VPWR,
     inout             VGND,
 `endif
     input  wire [7:0] ui_in,    // Dedicated inputs
@@ -143,7 +143,7 @@ myconfig_sky sram_ins (
 
 RAM32 ram1 (
 `ifdef USE_POWER_PINS
-      .VPWR(VDPWR),
+      .VPWR(VPWR),
       .VGND(VGND),
 `endif
       .CLK (clk),
