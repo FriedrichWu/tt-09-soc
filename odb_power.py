@@ -21,7 +21,7 @@ from reader import click_odb
 def power(reader, macro_x_pos: int):
   # Create ground / power nets
   tech = reader.db.getTech()
-  vpwr_net = reader.block.findNet('VPWR')
+  vpwr_net = reader.block.findNet('VDPWR')
   vgnd_net = reader.block.findNet('VGND')
   met4 = tech.findLayer('met4')
   vpwr_wire = vpwr_net.getSWires()[0]
