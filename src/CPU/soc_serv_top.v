@@ -17,7 +17,6 @@ wire        i_ibus_ack;
 wire        i_dbus_ack;
 wire        o_ibus_cyc;
 wire        o_dbus_cyc;
-wire        sram_ack;
 wire [31:0] o_dbus_dat;
 wire        o_dbus_we;
 // Arbiter
