@@ -115,7 +115,7 @@ always @(*) begin
 	i_rst = 'b1;//keep serv in reset
 	sram_ack = 'b0;
 	sram_data_read_serv = 'b0;
-	wmask = 4'b1;//defaut all active, word write
+	wmask = 4'b1111;//defaut all active, word write
 	case (cur_state)
 		IDLE: begin
 			if (rx_valid) begin
@@ -287,7 +287,6 @@ always @(*) begin
 						sram_ack = 'b1;
 					    nxt_state = SOC;
 				    end
-				nxt_state = SOC;
 				end
 			end
 		end

@@ -14,9 +14,9 @@ jobs:
           submodules: recursive
 
       - name: Build GDS
-        uses: TinyTapeout/tt-gds-action@tt09
+        uses: TinyTapeout/tt-gds-action@tt06-openlane2
         with:
-          flow: openlane2
+          openlane-tag: 2.0.4
 
   precheck:
     needs: gds
