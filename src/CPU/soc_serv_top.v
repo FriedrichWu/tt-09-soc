@@ -9,7 +9,7 @@ module soc_serv_top (
 	output wire        sram_we,//only dbus could write
 	output wire        sram_cs,//select mem
 	input  wire        sram_ack,
-	output wire [3:0]  sram_wmask,
+	output wire [3:0]  sram_wmask
 );
 //============INTERNAL_SIGNAL===========//
 wire [31:0] o_ibus_adr;
